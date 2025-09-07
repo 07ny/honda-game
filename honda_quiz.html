@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HONDA車種クイズ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .quiz-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+        }
+        .car-image {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-button {
+            background-color: #e2e8f0;
+            color: #4b5563;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .option-button:hover:not(.correct):not(.incorrect) {
+            background-color: #d1d9e6;
+        }
+        .option-button.correct {
+            background-color: #a7f3d0;
+            color: #065f46;
+            border-color: #10b981;
+        }
+        .option-button.incorrect {
+            background-color: #fecaca;
+            color: #b91c1c;
+            border-color: #ef4444;
+        }
+        .result-message {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .car-info {
+            background-color: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+        .car-info h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .car-info p {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #64748b;
+        }
+        .next-button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .next-button:hover {
+            background-color: #172b6b;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1 class="quiz-title">HONDA車種クイズ</h1>
+        <img id="car-image" class="car-image" src="" alt="HONDAの車種画像">
+        <div id="options" class="options-grid"></div>
+    </div>
+
+    <div id="result-screen" class="hidden">
+        <div id="message" class="result-message"></div>
+        <div id="car-info" class="car-info"></div>
+        <button id="next-button" class="next-button">次の問題へ</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const carImage = document.getElementById('car-image');
+        const optionsContainer = document.getElementById('options');
+        const messageElement = document.getElementById('message');
+        const carInfoElement = document.getElementById('car-info');
+        const nextButton = document.getElementById('next-button');
+
+        const cars = [
+            { name: "N-VAN e:", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-VAN+e:", info: "燃料: 電気、価格: 2,699,400円〜" },
+            { name: "N-ONE e:", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-ONE+e:", info: "燃料: 電気、価格: 先行情報" },
+            { name: "N-VAN", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-VAN", info: "燃料: ガソリン、価格: 1,392,600円〜" },
+            { name: "N-BOX", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-BOX", info: "燃料: ガソリン、価格: 1,739,100円〜" },
+            { name: "N-WGN", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-WGN", info: "燃料: ガソリン、価格: 1,344,200円〜" },
+            { name: "N-ONE", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=N-ONE", info: "燃料: ガソリン、価格: 1,734,700円〜" },
+            { name: "FIT", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=FIT", info: "燃料: ハイブリッド/ガソリン、価格: 1,776,500円〜" },
+            { name: "ODYSSEY", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=ODYSSEY", info: "燃料: ハイブリッド、価格: 4,800,400円〜" },
+            { name: "STEP WGN", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=STEP+WGN", info: "燃料: ハイブリッド/ガソリン、価格: 3,348,400円〜" },
+            { name: "FREED", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=FREED", info: "燃料: ハイブリッド/ガソリン、価格: 2,623,500円〜" },
+            { name: "VEZEL", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=VEZEL", info: "燃料: ハイブリッド/ガソリン、価格: 2,648,800円〜" },
+            { name: "ZR-V", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=ZR-V", info: "燃料: ハイブリッド/ガソリン、価格: 3,284,600円〜" },
+            { name: "WR-V", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=WR-V", info: "燃料: ガソリン、価格: 2,149,400円〜" },
+            { name: "ACCORD", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=ACCORD", info: "燃料: ハイブリッド、価格: 5,599,000円〜" },
+            { name: "CIVIC", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=CIVIC", info: "燃料: ハイブリッド/ガソリン、価格: 3,544,200円〜" },
+            { name: "CIVIC TYPE R", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=CIVIC+TYPE+R", info: "燃料: ガソリン、価格: 4,997,300円〜" },
+            { name: "PRELUDE", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=PRELUDE", info: "燃料: ハイブリッド、価格: 6,179,800円〜" },
+            { name: "CR-V e:FCEV", image: "https://placehold.co/600x400/1e3a8a/ffffff?text=CR-V+e:FCEV", info: "燃料: 燃料電池、価格: 8,094,900円〜" }
+        ];
+
+        let currentCar = null;
+        let correctAnswer = null;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function startNewQuiz() {
+            // 画面をクイズモードに切り替える
+            quizScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+            carInfoElement.innerHTML = '';
+            
+            // 全てのボタンからスタイルを削除
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.classList.remove('correct', 'incorrect');
+                button.disabled = false;
+            });
+
+            // ランダムに車種を1つ選ぶ
+            const quizCarIndex = Math.floor(Math.random() * cars.length);
+            currentCar = cars[quizCarIndex];
+            correctAnswer = currentCar.name;
+
+            // 画像と車種名を表示
+            carImage.src = currentCar.image;
+            carImage.alt = currentCar.name + "の画像";
+            
+            // 4択の選択肢を作成
+            const options = [correctAnswer];
+            const otherCars = cars.filter(car => car.name !== correctAnswer);
+            shuffle(otherCars);
+            for (let i = 0; i < 3; i++) {
+                options.push(otherCars[i].name);
+            }
+            shuffle(options);
+
+            // ボタンに選択肢をセット
+            optionsContainer.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-button');
+                button.onclick = () => handleAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function handleAnswer(selectedOption) {
+            // 全てのボタンを無効化
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.disabled = true;
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct');
+                } else if (button.textContent === selectedOption) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            // 結果画面に切り替え
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+
+            if (selectedOption === correctAnswer) {
+                messageElement.textContent = "正解です！";
+                messageElement.style.color = "#16a34a";
+            } else {
+                messageElement.textContent = `残念、不正解です... 正解は「${correctAnswer}」でした。`;
+                messageElement.style.color = "#dc2626";
+            }
+
+            // 車種情報を表示
+            carInfoElement.innerHTML = `
+                <h3 class="font-bold text-lg mb-2">${currentCar.name}</h3>
+                <p>${currentCar.info}</p>
+            `;
+        }
+
+        nextButton.addEventListener('click', startNewQuiz);
+
+        // アプリ起動時にクイズを開始
+        startNewQuiz();
+    });
+</script>
+
+</body>
+</html>
