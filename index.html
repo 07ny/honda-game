@@ -105,6 +105,12 @@
         .hidden {
             display: none;
         }
+        .info-list {
+            margin-bottom: 1rem;
+        }
+        .info-list > div {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -136,152 +142,176 @@
         { 
             name: "N-VAN e:", 
             image: "./images/N-VAN e.jpg", 
-            info: `
-                正式名称：Honda N-Van e: (電気モデル)<br>
-                タイプ：軽商用EVバン（軽自動車マイクロバン）<br>
-                発売開始年・世代：初登場 2018年（ガソリン版）、EV版「N-Van e:」が2024年10月に登場<br>
-                特徴・強み：Bピラーなしの広い乗降と積載設計、最大航続距離約245 km、30分急速充電対応、商用向けに一人乗りタイプなど複数仕様あり<br>
-                代表的なイメージ：配送やモバイルショップにも使える実用的なEVバン
-            ` 
+            info: [
+                { title: "正式名称", value: "Honda N-Van e: (電気モデル)" },
+                { title: "タイプ", value: "軽商用EVバン（軽自動車マイクロバン）" },
+                { title: "発売開始年・世代", value: "初登場 2018年（ガソリン版）、EV版「N-Van e:」が2024年10月に登場" },
+                { title: "特徴・強み", value: "Bピラーなしの広い乗降と積載設計、最大航続距離約245 km、30分急速充電対応、商用向けに一人乗りタイプなど複数仕様あり" },
+                { title: "代表的なイメージ", value: "配送やモバイルショップにも使える実用的なEVバン" }
+            ]
         },
         { 
             name: "N-ONE e:", 
             image: "./images/N-ONE e.jpg", 
-            info: `
-                正式名称：Honda N-One e:（電気モデル）<br>
-                タイプ：軽ハッチバックEV（レトロスタイル）<br>
-                発売開始年・世代：N-ONE自体は2012年から現行、EV版は2025年発売<br>
-                特徴・強み：一ペダル走行、V2L（車載から電力供給）対応、折りたたみ可能なリアシートなどレトロながらモダンな実用性<br>
-                代表的なイメージ：かわいくて機能的、都市生活にぴったりの小型EV
-            `
+            info: [
+                { title: "正式名称", value: "Honda N-One e:（電気モデル）" },
+                { title: "タイプ", value: "軽ハッチバックEV（レトロスタイル）" },
+                { title: "発売開始年・世代", value: "N-ONE自体は2012年から現行、EV版は2025年発売" },
+                { title: "特徴・強み", value: "一ペダル走行、V2L（車載から電力供給）対応、折りたたみ可能なリアシートなどレトロながらモダンな実用性" },
+                { title: "代表的なイメージ", value: "かわいくて機能的、都市生活にぴったりの小型EV" }
+            ]
         },
         { 
             name: "N-VAN", 
             image: "./images/N-VAN.jpg", 
-            info: `
-                正式名称：Honda N-Van (ガソリンモデル)<br>
-                タイプ：軽商用バン（マイクロバン）<br>
-                発売開始年・世代：2018年発売、現行モデル<br>
-                特徴・強み：広い室内空間、軽自動車ならではの機動力と実用性<br>
-                代表的なイメージ：働く車の定番、荷物もたくさん積める軽商用バン
-            `
+            info: [
+                { title: "正式名称", value: "Honda N-Van (ガソリンモデル)" },
+                { title: "タイプ", value: "軽商用バン（マイクロバン）" },
+                { title: "発売開始年・世代", value: "2018年発売、現行モデル" },
+                { title: "特徴・強み", value: "広い室内空間、軽自動車ならではの機動力と実用性" },
+                { title: "代表的なイメージ", value: "働く車の定番、荷物もたくさん積める軽商用バン" }
+            ]
         },
         { 
             name: "N-BOX", 
             image: "./images/N-BOX.jpg", 
-            info: `
-                正式名称：Honda N-Box<br>
-                タイプ：軽ハイトワゴン（軽自動車）<br>
-                発売開始年・世代：2011年発売、現行モデル<br>
-                特徴・強み：広い車内と人気の高さに裏打ちされた実用性、軽自動車販売台数トップ<br>
-                代表的なイメージ：日本で長く売れ続ける「家族向けの大人気軽自動車」
-            `
+            info: [
+                { title: "正式名称", value: "Honda N-Box" },
+                { title: "タイプ", value: "軽ハイトワゴン（軽自動車）" },
+                { title: "発売開始年・世代", value: "2011年発売、現行モデル" },
+                { title: "特徴・強み", value: "広い車内と人気の高さに裏打ちされた実用性、軽自動車販売台数トップ" },
+                { title: "代表的なイメージ", value: "日本で長く売れ続ける「家族向けの大人気軽自動車」" }
+            ]
         },
         { 
             name: "N-WGN", 
             image: "./images/N-WGN.jpg", 
-            info: `
-                正式名称：Honda N-Wgn<br>
-                タイプ：軽ハッチバック（軽自動車）<br>
-                発売開始年・世代：2013年登場、第2世代は2019年発売<br>
-                特徴・強み：シートのスライド機構による収納／乗員調整が可能<br>
-                代表的なイメージ：使い勝手を重視した、多用途に使える軽自動車
-            `
+            info: [
+                { title: "正式名称", value: "Honda N-Wgn" },
+                { title: "タイプ", value: "軽ハッチバック（軽自動車）" },
+                { title: "発売開始年・世代", value: "2013年登場、第2世代は2019年発売" },
+                { title: "特徴・強み", value: "シートのスライド機構による収納／乗員調整が可能" },
+                { title: "代表的なイメージ", value: "使い勝手を重視した、多用途に使える軽自動車" }
+            ]
         },
         { 
             name: "N-ONE", 
             image: "./images/N-ONE.jpg", 
-            info: `
-                正式名称：Honda N-One<br>
-                タイプ：軽ハッチバック（レトロデザイン）<br>
-                発売開始年・世代：2012年発売〜現行モデル<br>
-                特徴・強み：レトロでおしゃれ、Nシリーズの“かわいい”担当<br>
-                代表的なイメージ：デザイン好きに人気のレトロ軽
-            `
+            info: [
+                { title: "正式名称", value: "Honda N-One" },
+                { title: "タイプ", value: "軽ハッチバック（レトロデザイン）" },
+                { title: "発売開始年・世代", value: "2012年発売〜現行モデル" },
+                { title: "特徴・強み", value: "レトロでおしゃれ、Nシリーズの“かわいい”担当" },
+                { title: "代表的なイメージ", value: "デザイン好きに人気のレトロ軽" }
+            ]
         },
         { 
             name: "FIT", 
             image: "./images/FIT.jpg", 
-            info: "燃料: ハイブリッド/ガソリン、価格: 1,776,500円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド/ガソリン" },
+                { title: "価格", value: "1,776,500円〜" }
+            ]
         },
         { 
             name: "ODYSSEY", 
             image: "./images/ODYSSEY.jpg", 
-            info: `
-                正式名称：Honda Odyssey<br>
-                タイプ：プレミアムミニバン（日本向け）、大型ミニバン（北米向け）<br>
-                発売開始年・世代：日本では1994年登場（第1世代）、現行は第5世代（2013年〜）<br>
-                特徴・強み：低床・低重心設計で走行安定性が高く、乗降や積み込みがしやすい、日本では2016年にハイブリッド（e:HEV）モデルも追加<br>
-                代表的なイメージ：家族みんなで快適に乗れる高級志向のミニバン
-            `
+            info: [
+                { title: "正式名称", value: "Honda Odyssey" },
+                { title: "タイプ", value: "プレミアムミニバン（日本向け）、大型ミニバン（北米向け）" },
+                { title: "発売開始年・世代", value: "日本では1994年登場（第1世代）、現行は第5世代（2013年〜）" },
+                { title: "特徴・強み", value: "低床・低重心設計で走行安定性が高く、乗降や積み込みがしやすい、日本では2016年にハイブリッド（e:HEV）モデルも追加" },
+                { title: "代表的なイメージ", value: "家族みんなで快適に乗れる高級志向のミニバン" }
+            ]
         },
         { 
             name: "STEP WGN", 
             image: "./images/STEP WGN.jpg", 
-            info: `
-                正式名称：Honda Step Wgn<br>
-                タイプ：背が高いミニバン（8人乗り対応）<br>
-                発売開始年・世代：1996年登場、現行モデルまで継続<br>
-                特徴・強み：背が高く車内空間が広い、ドア構成がユニークで、運転席側は1ドア、助手席側は2ドア<br>
-                代表的なイメージ：ファミリー向けでユニークなデザインの万能ミニバン
-            `
+            info: [
+                { title: "正式名称", value: "Honda Step Wgn" },
+                { title: "タイプ", value: "背が高いミニバン（8人乗り対応）" },
+                { title: "発売開始年・世代", value: "1996年登場、現行モデルまで継続" },
+                { title: "特徴・強み", value: "背が高く車内空間が広い、ドア構成がユニークで、運転席側は1ドア、助手席側は2ドア" },
+                { title: "代表的なイメージ", value: "ファミリー向けでユニークなデザインの万能ミニバン" }
+            ]
         },
         { 
             name: "FREED", 
             image: "./images/FREED.jpg", 
-            info: "燃料: ハイブリッド/ガソリン、価格: 2,623,500円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド/ガソリン" },
+                { title: "価格", value: "2,623,500円〜" }
+            ]
         },
         { 
             name: "VEZEL", 
             image: "./images/VEZEL.jpg", 
-            info: "燃料: ハイブリッド/ガソリン、価格: 2,648,800円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド/ガソリン" },
+                { title: "価格", value: "2,648,800円〜" }
+            ]
         },
         { 
             name: "ZR-V", 
             image: "./images/ZR-V.jpg", 
-            info: `
-                正式名称：Honda ZR-V<br>
-                タイプ：コンパクトクロスオーバーSUV（Cセグメント）<br>
-                発売開始年・世代：2022年6月〜現行（北米ではHR-Vとして）<br>
-                特徴・強み：Civicと同プラットフォーム、広いパワートレーンとe:HEV対応など最新技術搭載<br>
-                代表的なイメージ：質感高く実用的なグローバルSUV
-            `
+            info: [
+                { title: "正式名称", value: "Honda ZR-V" },
+                { title: "タイプ", value: "コンパクトクロスオーバーSUV（Cセグメント）" },
+                { title: "発売開始年・世代", value: "2022年6月〜現行（北米ではHR-Vとして）" },
+                { title: "特徴・強み", value: "Civicと同プラットフォーム、広いパワートレーンとe:HEV対応など最新技術搭載" },
+                { title: "代表的なイメージ", value: "質感高く実用的なグローバルSUV" }
+            ]
         },
         { 
             name: "WR-V", 
             image: "./images/WR-V.jpg", 
-            info: `
-                正式名称：Honda WR-V (Elevate)<br>
-                タイプ：サブコンパクトSUV（Bセグメント）<br>
-                発売開始年・世代：Indiaで2023年発表、日本ではWR-Vとして2024年発売<br>
-                特徴・強み：多様なライフスタイルに対応する汎用性とスタイリング<br>
-                代表的なイメージ：元気で活動的な都市向けSUV、海外でも人気拡大中
-            `
+            info: [
+                { title: "正式名称", value: "Honda WR-V (Elevate)" },
+                { title: "タイプ", value: "サブコンパクトSUV（Bセグメント）" },
+                { title: "発売開始年・世代", value: "Indiaで2023年発表、日本ではWR-Vとして2024年発売" },
+                { title: "特徴・強み", value: "多様なライフスタイルに対応する汎用性とスタイリング" },
+                { title: "代表的なイメージ", value: "元気で活動的な都市向けSUV、海外でも人気拡大中" }
+            ]
         },
         { 
             name: "ACCORD", 
             image: "./images/ACCORD.jpg", 
-            info: "燃料: ハイブリッド、価格: 5,599,000円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド" },
+                { title: "価格", value: "5,599,000円〜" }
+            ]
         },
         { 
             name: "CIVIC", 
             image: "./images/CIVIC.jpg", 
-            info: "燃料: ハイブリッド/ガソリン、価格: 3,544,200円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド/ガソリン" },
+                { title: "価格", value: "3,544,200円〜" }
+            ]
         },
         { 
             name: "CIVIC TYPE R", 
             image: "./images/CIVIC TYPE R.jpg", 
-            info: "燃料: ガソリン、価格: 4,997,300円〜" 
+            info: [
+                { title: "燃料", value: "ガソリン" },
+                { title: "価格", value: "4,997,300円〜" }
+            ]
         },
         { 
             name: "PRELUDE", 
             image: "./images/PRELUDE.jpg", 
-            info: "燃料: ハイブリッド、価格: 6,179,800円〜" 
+            info: [
+                { title: "燃料", value: "ハイブリッド" },
+                { title: "価格", value: "6,179,800円〜" }
+            ]
         },
         { 
             name: "CR-V e:FCEV", 
             image: "./images/CR-V e FCEV.jpg", 
-            info: "燃料: 燃料電池、価格: 8,094,900円〜" 
+            info: [
+                { title: "燃料", value: "燃料電池" },
+                { title: "価格", value: "8,094,900円〜" }
+            ]
         }
     ];
 
@@ -299,7 +329,6 @@
     function startNewQuiz() {
         quizScreen.classList.remove('hidden');
         resultScreen.classList.add('hidden');
-        carInfoElement.innerHTML = '';
         
         document.querySelectorAll('.option-button').forEach(button => {
             button.classList.remove('correct', 'incorrect');
@@ -354,7 +383,11 @@
 
         carInfoElement.innerHTML = `
             <h3 class="font-bold text-lg mb-2">${currentCar.name}</h3>
-            <p>${currentCar.info.replace(/\n/g, '<br>')}</p>
+            <div class="info-list">
+                ${currentCar.info.map(item => `
+                    <div><strong>${item.title}:</strong> ${item.value}</div>
+                `).join('')}
+            </div>
         `;
     }
 
