@@ -124,7 +124,113 @@
     </div>
 </div>
 
-<script type="module" src="./script.js"></script>
+<script>
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const carImage = document.getElementById('car-image');
+    const optionsContainer = document.getElementById('options');
+    const messageElement = document.getElementById('message');
+    const carInfoElement = document.getElementById('car-info');
+    const nextButton = document.getElementById('next-button');
+
+    const cars = [
+        { name: "N-VAN e:", image: "./images/N-VAN e.jpg", info: "燃料: 電気、価格: 2,699,400円〜" },
+        { name: "N-ONE e:", image: "./images/N-ONE e.jpg", info: "燃料: 電気、価格: 先行情報" },
+        { name: "N-VAN", image: "./images/N-VAN.jpg", info: "燃料: ガソリン、価格: 1,392,600円〜" },
+        { name: "N-BOX", image: "./images/N-BOX.jpg", info: "燃料: ガソリン、価格: 1,739,100円〜" },
+        { name: "N-WGN", image: "./images/N-WGN.jpg", info: "燃料: ガソリン、価格: 1,344,200円〜" },
+        { name: "N-ONE", image: "./images/N-ONE.jpg", info: "燃料: ガソリン、価格: 1,734,700円〜" },
+        { name: "FIT", image: "./images/FIT.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 1,776,500円〜" },
+        { name: "ODYSSEY", image: "./images/ODYSSEY.jpg", info: "燃料: ハイブリッド、価格: 4,800,400円〜" },
+        { name: "STEP WGN", image: "./images/STEP WGN.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 3,348,400円〜" },
+        { name: "FREED", image: "./images/FREED.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 2,623,500円〜" },
+        { name: "VEZEL", image: "./images/VEZEL.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 2,648,800円〜" },
+        { name: "ZR-V", image: "./images/ZR-V.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 3,284,600円〜" },
+        { name: "WR-V", image: "./images/WR-V.jpg", info: "燃料: ガソリン、価格: 2,149,400円〜" },
+        { name: "ACCORD", image: "./images/ACCORD.jpg", info: "燃料: ハイブリッド、価格: 5,599,000円〜" },
+        { name: "CIVIC", image: "./images/CIVIC.jpg", info: "燃料: ハイブリッド/ガソリン、価格: 3,544,200円〜" },
+        { name: "CIVIC TYPE R", image: "./images/CIVIC TYPE R.jpg", info: "燃料: ガソリン、価格: 4,997,300円〜" },
+        { name: "PRELUDE", image: "./images/PRELUDE.jpg", info: "燃料: ハイブリッド、価格: 6,179,800円〜" },
+        { name: "CR-V e:FCEV", image: "./images/CR-V e FCEV.jpg", info: "燃料: 燃料電池、価格: 8,094,900円〜" }
+    ];
+
+    let currentCar = null;
+    let correctAnswer = null;
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startNewQuiz() {
+        quizScreen.classList.remove('hidden');
+        resultScreen.classList.add('hidden');
+        carInfoElement.innerHTML = '';
+        
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.classList.remove('correct', 'incorrect');
+            button.disabled = false;
+        });
+
+        const quizCarIndex = Math.floor(Math.random() * cars.length);
+        currentCar = cars[quizCarIndex];
+        correctAnswer = currentCar.name;
+
+        carImage.src = currentCar.image;
+        carImage.alt = currentCar.name + "の画像";
+        
+        const options = [correctAnswer];
+        const otherCars = cars.filter(car => car.name !== correctAnswer);
+        shuffle(otherCars);
+        for (let i = 0; i < 3; i++) {
+            options.push(otherCars[i].name);
+        }
+        shuffle(options);
+
+        optionsContainer.innerHTML = '';
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.classList.add('option-button');
+            button.onclick = () => handleAnswer(option);
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function handleAnswer(selectedOption) {
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.disabled = true;
+            if (button.textContent === correctAnswer) {
+                button.classList.add('correct');
+            } else if (button.textContent === selectedOption) {
+                button.classList.add('incorrect');
+            }
+        });
+
+        quizScreen.classList.add('hidden');
+        resultScreen.classList.remove('hidden');
+
+        if (selectedOption === correctAnswer) {
+            messageElement.textContent = "正解です！";
+            messageElement.style.color = "#16a34a";
+        } else {
+            messageElement.textContent = `残念、不正解です... 正解は「${correctAnswer}」でした。`;
+            messageElement.style.color = "#dc2626";
+        }
+
+        carInfoElement.innerHTML = `
+            <h3 class="font-bold text-lg mb-2">${currentCar.name}</h3>
+            <p>${currentCar.info}</p>
+        `;
+    }
+
+    nextButton.addEventListener('click', startNewQuiz);
+
+    window.onload = startNewQuiz;
+</script>
 
 </body>
 </html>
